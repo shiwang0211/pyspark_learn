@@ -1,0 +1,27 @@
+LOCAL PC:
+cd /home/hadoop/Dropbox/Data\ \Science\ \Study/Spark_ML/
+# The files will need to be copied to another location becasue file path contains space
+cp Main.py  /home/hadoop/Desktop/Main.py
+# which pyspark
+sudo /usr/local/spark/bin/spark-submit --master local /home/hadoop/Desktop/Main.py
+# Copy script file to goolge cloud 
+gsutil cp Line_Count.py gs://dataproc-08b834aa-82f4-42c5-b794-67fc46a96d4d-us
+
+DATA ANALYSIS
+# delete first row with column names
+sed -i '1d' Train_Dataset_Cleaned_Sample.csv 
+
+
+
+REMOTE:
+#Connection: 
+ssh -i ~/.ssh/my-ssh-key shiwang@104.196.206.24
+gsutil cp gs://dataproc-08b834aa-82f4-42c5-b794-67fc46a96d4d-us/sps_data_sample_160218_300-400.csv ./spm/data
+../../usr/bin/spark-submit ./spm/src/Line_Count.py
+
+
+OPTIONAL:
+sed -i '1d' ./spm/data/sps_data_sample_160218_300-400.csv 
+hdfs dfs -mkdir -p /spm/dataset
+hdfs dfs -put ./spm/data/sps_data_sample_160218_300-400.csv /spm/dataset
+

@@ -1,0 +1,27 @@
+LOCAL:
+ssh -i ~/.ssh/my-ssh-key shiwang@35.185.126.18
+gsutil cp Line_Count.py gs://dataproc-08b834aa-82f4-42c5-b794-67fc46a96d4d-us
+
+
+REMOTE:
+gsutil cp gs://dataproc-08b834aa-82f4-42c5-b794-67fc46a96d4d-us/sps_data_sample_160218_300-400.csv ./spm/data
+../../usr/bin/spark-submit ./spm/src/Line_Count.py
+
+
+OPTIONAL:
+sed -i '1d' ./spm/data/sps_data_sample_160218_300-400.csv 
+/hdfs dfs -mkdir -p /spm/dataset
+hdfs dfs -put ./spm/data/sps_data_sample_160218_300-400.csv /spm/dataset
+
+
+GITHUB:
+sudo apt-get install git
+git config --global user.name "shiwang0211"
+git config --global user.email "shiwang0211@gmail.com"
+git init ./
+gedit README
+git add -A
+git commit -m "Initial COmmits"
+git remote add origin http://github.com/shiwang0211/Spark_SPM
+git push origin master
+
