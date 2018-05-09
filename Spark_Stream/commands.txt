@@ -1,0 +1,18 @@
+Local:
+cd /home/hadoop/Dropbox/Data\ Science\ Study/Spark_Stream
+cp main.py ~/Desktop/main.py
+sudo /usr/local/spark/bin/spark-submit --jars ~/Downloads/spark-streaming-kafka-0-8-assembly.jar ~/Desktop/main.py
+
+Kafka:
+cd /usr/local/kafka
+bin/zookeeper-server-start.sh config/zookeeper.properties &
+bin/kafka-server-start.sh config/server.properties
+
+Others:
+kill -9 $(lsof -t -i:9092)
+sudo ssh -i ~/.ssh/my-ssh-key shiwang@104.196.206.24
+gsutil cp main.py gs://dataproc-08b834aa-82f4-42c5-b794-67fc46a96d4d-us/main.py
+
+
+
+
